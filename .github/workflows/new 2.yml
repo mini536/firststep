@@ -16,9 +16,8 @@ jobs:
 
     - name: Download and mod fenix
       run: |
-        wget -q -O "file" https://jaist.dl.sourceforge.net/project/xiaomi-eu-multilang-miui-roms/xiaomi.eu/MIUI-WEEKLY-RELEASES/21.8.4/xiaomi.eu_multi_MI9_21.8.4_v12-11.zip
-        mkdir upload
-        mv file.zip./upload/
+        wget -q -O "file" https://www.bing.com/th?id=OHR.QuayBridge_EN-CA2917632382_1920x1080.jpg&rf=LaDigue_1920x1080.jpg
+        mv file ./upload/
     - name: Get current date
       id: date
       run: echo "::set-output name=date::$(date +%Y年%m月%d日%H时)"
@@ -26,7 +25,7 @@ jobs:
       uses: svenstaro/upload-release-action@v2
       with:           
         repo_token: ${{ secrets.ACTION_TOKEN }}
-        file: ./upload/file.zip
+        file: ./upload/file
         tag: ${{ github.ref }}           
         body: "Nightly build"           
         file_glob: true           
