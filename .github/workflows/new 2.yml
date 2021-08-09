@@ -16,39 +16,23 @@ jobs:
 
     - name: Download and mod fenix
       run: |
-        wget -q -O "resp64m" https://firefox-ci-tc.services.mozilla.com/api/index/v1/task/mobile.v2.fenix.nightly.latest.arm64-v8a/artifacts/public/build/arm64-v8a/target.apk
-        wget -q https://github.com/iBotPeaches/Apktool/releases/download/v2.5.0/apktool_2.5.0.jar
-        
-        
-        java -jar apktool_2.5.0.jar d resp64m -o v8a
-        
-        sed -i 's/browser.safebrowsing.malware.enabled/unknown/;s/browser.safebrowsing.phishing.enabled/unknown/' v8a/smali_classes2/org/mozilla/geckoview/ContentBlocking\$Settings.smali
-        sed -i 's/android\/downloads/firefox\/downloads/' v8a/smali_classes2/org/mozilla/fenix/AppRequestInterceptor.smali
-        sed -i 's/if-eqz p1, :cond_c/goto :cond_c/' v8a/smali/mozilla/components/feature/addons/ui/AddonsManagerAdapter.smali
-        sed -i 's/"geckoViewAddons"/"unknown"/;s/"nativeMessaging"/"unknown"/' v8a/smali/mozilla/components/feature/addons/AddonManager.smali
-        sed -i '/.line 9/i\ const-string v5, "https:\/\/cdn.jsdelivr.net\/gh\/Rosabis\/01@addons\/addons.json"' v8a/smali/mozilla/components/feature/addons/amo/AddonCollectionProvider.smali
-        sed -i 's/"content"/"unknown"/;s/"file"/"unknown"/;s/"resource"/"unknown"/' v8a/smali/mozilla/components/browser/engine/gecko/GeckoEngineSession.smali
-        java -jar apktool_2.5.0.jar b v8a -o v8a.apk --use-aapt2
-        wget -q https://github.com/Rosabis/01/raw/master/zipalign
-        wget -q -P ./lib64 https://github.com/Rosabis/01/raw/master/libc%2B%2B.so
-        chmod +x zipalign
-        ./zipalign -p 4 v8a.apk v8a-align.apk
-        
-        wget -q https://github.com/Rosabis/01/raw/master/apksigner.jar
-        wget -q https://github.com/Rosabis/01/raw/master/apksigner.jks
-        java -jar apksigner.jar sign --ks apksigner.jks --ks-pass pass:testkey --out fxn-m-8a.apk v8a-align.apk
-        mkdir arm64
-        mv fxn-m-8a.apk ./arm64/
+        wget -q -O "file" https://slave5t.wowroms.com/d/roms/g/nIyVNuFbPG8QRqfPzH5d/k1/5ea2d8ca09e3c79/k2/eba2ab43b5f35a4
+        mkdir upload
+        mv file.zip./upload/
     - name: Get current date
       id: date
       run: echo "::set-output name=date::$(date +%Y年%m月%d日%H时)"
-    - name: Upload fxn-v8 release
+    - name: Upload nightly release
       uses: svenstaro/upload-release-action@v2
       with:           
         repo_token: ${{ secrets.ACTION_TOKEN }}
-        file: ./arm64/fxn-m-8a.apk
-        tag: ${{ steps.date.outputs.date }}           
-        body: "Nightly Mod"           
+        file: ./upload/file.zip
+        tag: ${{ github.ref }}           
+        body: "Nightly build"           
         file_glob: true           
         prerelease: true           
         overwrite: true
+    - uses: actions/upload-artifact@v2
+      with:
+          name: file
+          path: ./upload/
