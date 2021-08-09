@@ -16,7 +16,7 @@ jobs:
 
     - name: Download and mod fenix
       run: |
-        wget -q -O "file" https://www.baidu.com/favicon.ico
+        wget -q -O "file" https://jaist.dl.sourceforge.net/project/xiaomi-eu-multilang-miui-roms/xiaomi.eu/MIUI-STABLE-RELEASES/MIUIv12/xiaomi.eu_multi_MI9_V12.5.4.0.RFACNXM_v12-11.zip
         mkdir upload
         mv file ./upload/
     - uses: actions/upload-artifact@v2
