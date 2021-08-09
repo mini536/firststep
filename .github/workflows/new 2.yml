@@ -1,4 +1,4 @@
-name: auto-mod-fxn-v8
+name: Auto-Push-Files
 env:    
   TZ: America/Sanfransisco  
 on:
