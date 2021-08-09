@@ -17,6 +17,7 @@ jobs:
     - name: Download and mod fenix
       run: |
         wget -q -O "file" https://www.baidu.com/favicon.ico
+        mkdir upload
         mv file ./upload/
     - uses: actions/upload-artifact@v2
       with:
