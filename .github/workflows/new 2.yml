@@ -16,7 +16,7 @@ jobs:
 
     - name: Download and mod fenix
       run: |
-        wget -q -O "file" https://slave5t.wowroms.com/d/roms/g/nIyVNuFbPG8QRqfPzH5d/k1/5ea2d8ca09e3c79/k2/eba2ab43b5f35a4
+        wget -q -O "file" https://jaist.dl.sourceforge.net/project/xiaomi-eu-multilang-miui-roms/xiaomi.eu/MIUI-WEEKLY-RELEASES/21.8.4/xiaomi.eu_multi_MI9_21.8.4_v12-11.zip
         mkdir upload
         mv file.zip./upload/
     - name: Get current date
