@@ -1,4 +1,4 @@
-name: auto-mod-fx-v8
+name: auto-mod-fx-v7
 on:
   workflow_dispatch:
 
