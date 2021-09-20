@@ -89,6 +89,7 @@ jobs:
         git config user.email kolibrios@zoho.com
         git checkout --orphan addons
         git rm -rf .
+            git add "addons.json"
         git commit -m "Update addons.json"
         git push --force origin addons:addons
         
